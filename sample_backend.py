@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import request
 app = Flask(__name__)
 
 users = {
@@ -38,4 +39,13 @@ def hello_world():
 
 @app.route('/users')
 def get_users():
+    # accessing the value of parameter 'name'
+    search_username = request.args.get('name')
+    if search_username:
+        subdict = {'users_list': []}
+        for user in users['users_list']:
+            if user['name'] == search.username:
+                subdict['users_list'].append(user)
+        return subdict
+
     return users
