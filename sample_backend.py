@@ -3,32 +3,32 @@ from flask import request
 app = Flask(__name__)
 
 users = {
-   'users_list' :
+    'users_list':
     [
         {
-         'id' : 'xyz789',
-         'name' : 'Charlie',
-         'job': 'Janitor',
+            'id': 'xyz789',
+            'name': 'Charlie',
+            'job': 'Janitor',
         },
         {
-         'id' : 'abc123',
-         'name': 'Mac',
-         'job': 'Bouncer',
+            'id': 'abc123',
+            'name': 'Mac',
+            'job': 'Bouncer',
         },
         {
-         'id' : 'ppp222',
-         'name': 'Mac',
-         'job': 'Professor',
+            'id': 'ppp222',
+            'name': 'Mac',
+            'job': 'Professor',
         },
         {
-         'id' : 'yat999',
-         'name': 'Dee',
-         'job': 'Aspring actress',
+            'id': 'yat999',
+            'name': 'Dee',
+            'job': 'Aspring actress',
         },
         {
-         'id' : 'zap555',
-         'name': 'Dennis',
-         'job': 'Bartender',
+            'id': 'zap555',
+            'name': 'Dennis',
+            'job': 'Bartender',
         }
     ]
 }
@@ -44,8 +44,17 @@ def get_users():
     if search_username:
         subdict = {'users_list': []}
         for user in users['users_list']:
-            if user['name'] == search.username:
+            if user['name'] == search_username:
                 subdict['users_list'].append(user)
         return subdict
 
+    return users
+
+@app.route('/users/<id>')
+def get_user(id):
+    if id:
+        for user in users['users_list']:
+            if user['id'] == id:
+                return user
+        return ({})
     return users
