@@ -69,7 +69,7 @@ def _post_user(request):
     user_to_add = request.get_json()
     users['users_list'].append(user_to_add)
     resp = jsonify(success=True)
-    # resp.status_code = 200 # optionally, you can set a response code
+    resp.status_code = 201 # optionally, you can set a response code
     # 200 is the default code for a normal response
     return resp
 
