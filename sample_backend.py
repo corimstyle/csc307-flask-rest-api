@@ -3,7 +3,8 @@ from flask import request
 from flask import jsonify
 from flask_cors import CORS
 import random
-import sys
+import string
+
 app = Flask(__name__)
 CORS(app)
 
@@ -79,10 +80,16 @@ def _post_user(request):
     return resp
 
 def _generate_ID():
-    return random.randint(0, sys.maxsize)
+    user_ID = ''
+    for _ in range(3):
+        user_ID += random.choice(string.ascii_lowercase)
+    for _ in range(3):
+        user_ID += str(random.randint(0, 9))
+    return user_ID
 
 def _delete_user(request):
     user_to_delete = request.get_json()
+    print(user_to_delete)
     try:
         users['users_list'].remove(user_to_delete)
         resp = jsonify(success=True)
