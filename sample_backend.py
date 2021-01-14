@@ -81,6 +81,7 @@ def _delete_user(request):
     try:
         users['users_list'].remove(user_to_delete)
         resp = jsonify(success=True)
+        resp.status_code = 204
     except ValueError:
         resp = jsonify(success=False)
         resp.status_code = 404
