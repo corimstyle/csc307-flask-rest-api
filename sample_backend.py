@@ -69,12 +69,17 @@ def _get_user(request):
 
 def _post_user(request):
     user_to_add = request.get_json()
-    user_to_add['id'] = random.randint(0, sys.maxsize)
+    user_ID = _generate_ID()
+    print(user_ID)
+    user_to_add['id'] = user_ID
     users['users_list'].append(user_to_add)
-    resp = jsonify(user_to_add)
+    resp = jsonify(success=True)
     resp.status_code = 201 # optionally, you can set a response code
     # 200 is the default code for a normal response
     return resp
+
+def _generate_ID():
+    return random.randint(0, sys.maxsize)
 
 def _delete_user(request):
     user_to_delete = request.get_json()
